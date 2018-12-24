@@ -6,7 +6,14 @@ import mongoose from 'mongoose';
 
 export const AssessmentSchema = mongoose.Schema(
   {
-    rate: Number
+    userId: mongoose.Schema.Types.ObjectId,
+    assessmentSkills: [
+      {
+        skillId: mongoose.Schema.Types.ObjectId,
+        skillRate: Number,
+        axeId: mongoose.Schema.Types.ObjectId
+      }
+    ]
   },
   {
     timestamps: true

@@ -12,7 +12,10 @@ export const SkillSchema = mongoose.Schema(
       trim: true,
       unique: true
     },
-    multiplier: Number
+    multiplier: {
+      type: Number,
+      default: 1
+    }
   }
 );
 

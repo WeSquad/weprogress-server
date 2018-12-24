@@ -4,19 +4,35 @@ export default gql`
     type Assessment {
       id: ID!
       createdAt: String!
-      rate: Int
+      user: User!
+      assessmentSkills: [AssessmentSkill]
     }
 
-    input CreateAssessment {
-      rate: Int
+    type AssessmentSkill {
+      axe: Axe!
+      skill: Skill!
+      skillRate: Float!
+    }
+
+    input CreateAssessmentInput {
+      userId: ID!
+      assessmentSkills: [CreateAssessmentSkillInput]
+    }
+
+    input CreateAssessmentSkillInput {
+      axeId: ID!
+      skillId: ID!
+      skillRate: Float!
     }
 
     extend type Query {
       assessments: [Assessment]
-      assessment(id: ID): Assessment
+      assessmentsByUser(user: ID!): [Assessment]
+      assessment(id: ID!): Assessment
     }
 
     extend type Mutation {
-      createAssessment(input: CreateAssessment): Assessment!
+      createAssessment(input: CreateAssessmentInput!): Assessment!
+      deleteAssessment(id: ID!): Assessment!
     }
 `;
