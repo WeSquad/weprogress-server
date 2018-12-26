@@ -1,20 +1,22 @@
 {
-  "name": "weprogress",
+  "name": "weprogress-server",
   "version": "0.0.1",
   "author": "Nicolas Pinon",
-  "main": "src/index.js",
+  "main": "src/server.js",
   "scripts": {
     "build": "babel src --out-dir dist",
     "restart": "rimraf dist && npm run build && npm run start",
     "dev": "nodemon --exec npm run restart",
-    "start": "node dist/index"
+    "start": "node dist/server"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "apollo-server-hapi": "^2.3.1",
+    "apollo-server-express": "^2.3.1",
+    "bcrypt": "^3.0.3",
+    "express": "^4.16.4",
     "graphql": "^14.0.2",
     "graphql-codegen-core": "^0.15.0",
-    "hapi": "^17.8.1",
+    "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.0",
     "rimraf": "^2.6.2"
   },

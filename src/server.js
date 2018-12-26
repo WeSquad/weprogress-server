@@ -1,27 +1,24 @@
-import hapi from 'hapi';
-import { ApolloServer } from 'apollo-server-hapi';
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
 
 import connect from './db/index';
 
 import resolvers from './resolvers';
 import types from './types';
 
-export const start = async () => {
-  await connect();
+connect();
 
-  const apolloServer = new ApolloServer({
-    typeDefs: types,
-    resolvers: resolvers
-  });
+const app = express();
 
-  const server = hapi.server({
-    port: 4000,
-    host: 'localhost'
-  });
+const apolloServer = new ApolloServer({
+  typeDefs: types,
+  resolvers: resolvers
+});
 
-  await apolloServer.applyMiddleware({ app: server });
-  await apolloServer.installSubscriptionHandlers(server.listener);
-  await server.start();
+apolloServer.applyMiddleware({ app, path: '/graphql' });
 
-  console.log(`🚀 Server running at: ${server.info.uri}`);
-};
+const port = 4000;
+
+app.listen({ port: port }, () => {
+  console.log(`🚀 Server running at: http://localhost:${port}/`)
+});

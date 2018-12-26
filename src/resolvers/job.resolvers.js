@@ -1,6 +1,6 @@
 import Job from '../models/job.model';
 import Axe from '../models/axe.model';
-import { ApolloError } from 'apollo-server-hapi';
+import { ApolloError } from 'apollo-server-express';
 
 export default {
   Query: {

@@ -1,6 +1,6 @@
 import Axe from '../models/axe.model';
 import Skill from '../models/skill.model';
-import { ApolloError } from 'apollo-server-hapi';
+import { ApolloError } from 'apollo-server-express';
 
 export default {
   Query: {
