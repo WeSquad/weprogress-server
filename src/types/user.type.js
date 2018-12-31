@@ -25,6 +25,7 @@ export default gql`
       email: String!
       firstName: String
       lastName: String
+      password: String
       role: Role
       jobID: ID
     }
@@ -52,7 +53,7 @@ export default gql`
     extend type Mutation {
       createUser(input: CreateUserInput!): User!
       updateUser(id: ID!, input: UpdateUserInput!): User!
-      assignJob(id: ID!, jobId: String!): User!
+      assignJob(id: ID!, jobId: ID!): User!
       register(input: RegisterUserInput!): AuthPayload
       login(email: String!, password: String!): AuthPayload
     }

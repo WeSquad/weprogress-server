@@ -1,7 +1,4 @@
-import Assessment from '../models/assessment.model';
-import User from '../models/user.model';
-import Axe from '../models/axe.model';
-import Skill from '../models/skill.model';
+import { Assessment, User, Axe, Skill } from '../models';
 
 export default {
   Query: {

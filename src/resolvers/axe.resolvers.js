@@ -1,5 +1,4 @@
-import Axe from '../models/axe.model';
-import Skill from '../models/skill.model';
+import { Axe, Skill } from '../models';
 import { ApolloError } from 'apollo-server-express';
 
 export default {

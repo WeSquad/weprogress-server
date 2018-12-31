@@ -1,13 +1,13 @@
-import User from '../models/user.model';
-import Job from '../models/job.model';
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+require('dotenv').config();
+
+import { User, Job } from '../models';
+import { AuthenticationError, UserInputError, ForbiddenError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
-import { APP_SECRET } from '../config';
+import { adminValidate } from '../services';
 
 export default {
   Query: {
-    users: async () => {
+    users: async (_, args, context) => {
       return User.find({});
     },
     user: async (_, args) => {
@@ -15,7 +15,14 @@ export default {
     }
   },
   Mutation: {
-    createUser: async (_, args) => {
+    createUser: async (_, args, context) => {
+      // Check if user has admin access
+      const isAdmin = await adminValidate(context.user);
+
+      if (!isAdmin) {
+        return new ForbiddenError('Access restricted.');
+      }
+
       return User.create(args.input);
     },
     updateUser: async (_, args) => {
@@ -23,20 +30,12 @@ export default {
     },
     assignJob: async (_, args) => {
       return User.findOneAndUpdate(args.id, {
-        "jobId": mongoose.Types.ObjectId(args.jobId)
+        "jobId": args.jobId
       }, { new: true });
     },
     register: async (_, args) => {
-      const password = await bcrypt.hash(args.input.password, 10);
-
-      const user = User.create({
-        "firstName": args.input.firstName,
-        "lastName": args.input.lastName,
-        "email": args.input.email,
-        "password": password
-      });
-
-      const token = jwt.sign({ userId: user.id }, APP_SECRET, { expiresIn: '7d' });
+      const user = User.create(args.input);
+      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: '7d' });
 
       return {
         token,
@@ -46,15 +45,15 @@ export default {
     login: async (_, args) => {
       const user = await User.findOne({"email": args.email});
       if (!user) {
-        throw new Error('No such user found')
+        throw new UserInputError('No such user found')
       }
 
-      const valid = await bcrypt.compare(args.password, user.password)
+      const valid = await user.validatePassword(args.password);
       if (!valid) {
-        throw new Error('Invalid password')
+        throw new AuthenticationError('Invalid password')
       }
 
-      const token = jwt.sign({ userId: user.id }, APP_SECRET, { expiresIn: '7d' })
+      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: '7d' })
 
       return {
         token,

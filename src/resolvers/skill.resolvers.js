@@ -1,4 +1,4 @@
-import Skill from '../models/skill.model';
+import { Skill } from '../models';
 import { ApolloError } from 'apollo-server-express';
 
 export default {

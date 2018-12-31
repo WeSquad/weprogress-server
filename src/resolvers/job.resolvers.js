@@ -1,5 +1,4 @@
-import Job from '../models/job.model';
-import Axe from '../models/axe.model';
+import { Job, Axe } from '../models';
 import { ApolloError } from 'apollo-server-express';
 
 export default {

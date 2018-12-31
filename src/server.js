@@ -1,18 +1,38 @@
+require('dotenv').config();
+
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
+import jwt from 'jsonwebtoken';
 
-import connect from './db/index';
+import mongodb from './db/index';
+import { User } from './models';
 
 import resolvers from './resolvers';
 import types from './types';
 
-connect();
-
+mongodb();
 const app = express();
 
 const apolloServer = new ApolloServer({
   typeDefs: types,
-  resolvers: resolvers
+  resolvers: resolvers,
+  context: async ({ req }) => {
+    var user = null;
+
+    if (req.headers.authorization) {
+      const token = req.headers.authorization.replace('Bearer ', '');
+      try {
+        const { userId } = jwt.verify(token, process.env.APP_SECRET);
+        user = await User.findById(userId).exec();
+      } catch (err) {
+        throw new ForbiddenError('Invalid Token, please renew it.');
+      }
+    }
+
+    return {
+      user: user
+    }
+  }
 });
 
 apolloServer.applyMiddleware({ app, path: '/graphql' });
