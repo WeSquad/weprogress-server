@@ -21,9 +21,7 @@ export const UserSchema = mongoose.Schema({
     enum: Object.keys(roles),
     default: roles.user
   },
-  jobId: {
-    type: mongoose.Schema.Types.ObjectId
-  },
+  jobsIds: [mongoose.Schema.Types.ObjectId],
   password: {
     type: String,
     require: true

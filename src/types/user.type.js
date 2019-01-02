@@ -11,9 +11,10 @@ export default gql`
       email: String!
       firstName: String
       lastName: String
+      fullName: String
       password: String!
       role: Role!
-      job: Job
+      jobs: [Job]
     }
 
     type AuthPayload {
@@ -27,7 +28,7 @@ export default gql`
       lastName: String
       password: String
       role: Role
-      jobID: ID
+      jobsIds: [ID]
     }
 
     input UpdateUserInput {
@@ -35,7 +36,7 @@ export default gql`
       firstName: String
       lastName: String
       role: Role
-      jobID: ID
+      jobsIds: [ID]
     }
 
     input RegisterUserInput {
@@ -48,12 +49,14 @@ export default gql`
     extend type Query {
       users: [User]
       user(id: ID!): User
+      me: User
     }
 
     extend type Mutation {
       createUser(input: CreateUserInput!): User!
       updateUser(id: ID!, input: UpdateUserInput!): User!
-      assignJob(id: ID!, jobId: ID!): User!
+      addJobs(id: ID!, jobs: [ID!]!): User!
+      removeJobs(id: ID!, jobs: [ID!]!): User!
       register(input: RegisterUserInput!): AuthPayload
       login(email: String!, password: String!): AuthPayload
     }

@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, ForbiddenError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
 import mongodb from './db/index';

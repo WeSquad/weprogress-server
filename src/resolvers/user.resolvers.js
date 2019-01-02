@@ -7,11 +7,18 @@ import { adminValidate } from '../services';
 
 export default {
   Query: {
-    users: async (_, args, context) => {
+    users: async () => {
       return User.find({});
     },
     user: async (_, args) => {
       return User.findById(args.id);
+    },
+    me: async (_, args, context) => {
+      if (!context.user) {
+        throw new UserInputError('No such user found.');
+      }
+
+      return context.user;
     }
   },
   Mutation: {
@@ -28,10 +35,11 @@ export default {
     updateUser: async (_, args) => {
       return User.findOneAndUpdate(args.id, args.input, { new: true });
     },
-    assignJob: async (_, args) => {
-      return User.findOneAndUpdate(args.id, {
-        "jobId": args.jobId
-      }, { new: true });
+    addJobs: async (_, args) => {
+      return User.findByIdAndUpdate({ _id: args.id }, { $addToSet: { jobsIds: args.jobs } }, { new: true })
+    },
+    removeJobs: async (_, args) => {
+      return User.findByIdAndUpdate({ _id: args.id }, { $pull: { jobsIds: { $in: args.jobs } } }, { new: true })
     },
     register: async (_, args) => {
       const user = User.create(args.input);
@@ -40,20 +48,20 @@ export default {
       return {
         token,
         user,
-      };
+      }
     },
     login: async (_, args) => {
       const user = await User.findOne({"email": args.email});
       if (!user) {
-        throw new UserInputError('No such user found')
+        throw new UserInputError('No such user found.');
       }
 
       const valid = await user.validatePassword(args.password);
       if (!valid) {
-        throw new AuthenticationError('Invalid password')
+        throw new AuthenticationError('Invalid password.');
       }
 
-      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: '7d' })
+      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: '7d' });
 
       return {
         token,
@@ -62,8 +70,11 @@ export default {
     }
   },
   User: {
-    job(user) {
-      return Job.findById(user.jobId);
+    jobs(user) {
+      return Job.find({ '_id': { $in: user.jobsIds }});
+    },
+    fullName(user) {
+      return `${user.firstName} ${user.lastName}`;
     }
   }
 }
