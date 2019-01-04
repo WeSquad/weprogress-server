@@ -41,6 +41,14 @@ export default {
     removeJobs: async (_, args) => {
       return User.findByIdAndUpdate({ _id: args.id }, { $pull: { jobsIds: { $in: args.jobs } } }, { new: true })
     },
+    addMentor: async (_, args) => {
+      const mentor = await User.findByIdAndUpdate({ _id: args.mentorId }, { $addToSet: { menteesIds: args.id } }, { new: true });
+      return User.findByIdAndUpdate({ _id: args.id }, { $addToSet: { mentorsIds: args.mentorId } }, { new: true })
+    },
+    removeMentor: async (_, args) => {
+      const mentor = await User.findByIdAndUpdate({ _id: args.mentorId }, { $pull: { menteesIds: { $in: args.id } } }, { new: true })
+      return User.findByIdAndUpdate({ _id: args.id }, { $pull: { mentorsIds: { $in: args.mentorId } } }, { new: true })
+    },
     register: async (_, args) => {
       const user = User.create(args.input);
       const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: '7d' });
@@ -75,6 +83,12 @@ export default {
     },
     fullName(user) {
       return `${user.firstName} ${user.lastName}`;
+    },
+    mentors(user) {
+      return User.find({ '_id': { $in: user.mentorsIds }});
+    },
+    mentees(user) {
+      return User.find({ '_id': { $in: user.menteesIds }});
     }
   }
 }

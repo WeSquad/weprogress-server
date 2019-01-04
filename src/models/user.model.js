@@ -22,6 +22,8 @@ export const UserSchema = mongoose.Schema({
     default: roles.user
   },
   jobsIds: [mongoose.Schema.Types.ObjectId],
+  mentorsIds: [mongoose.Schema.Types.ObjectId],
+  menteesIds: [mongoose.Schema.Types.ObjectId],
   password: {
     type: String,
     require: true

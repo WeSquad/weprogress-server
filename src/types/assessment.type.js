@@ -5,22 +5,30 @@ export default gql`
       id: ID!
       createdAt: String!
       user: User!
-      assessmentSkills: [AssessmentSkill]
+      axes: [AssessmentAxe]
+    }
+
+    type AssessmentAxe {
+      axe: Axe!
+      skills: [AssessmentSkill]
     }
 
     type AssessmentSkill {
-      axe: Axe!
       skill: Skill!
       skillRate: Float!
     }
 
     input CreateAssessmentInput {
       userId: ID!
-      assessmentSkills: [CreateAssessmentSkillInput]
+      axes: [CreateAssessmentSkillInput]
+    }
+
+    input CreateAssessmentAxeInput {
+      axeId: ID!
+      skills: [CreateAssessmentSkillInput]
     }
 
     input CreateAssessmentSkillInput {
-      axeId: ID!
       skillId: ID!
       skillRate: Float!
     }

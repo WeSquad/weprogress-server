@@ -15,6 +15,8 @@ export default gql`
       password: String!
       role: Role!
       jobs: [Job]
+      mentors: [User]
+      mentees: [User]
     }
 
     type AuthPayload {
@@ -29,6 +31,8 @@ export default gql`
       password: String
       role: Role
       jobsIds: [ID]
+      mentorsIds: [ID]
+      menteesIds: [ID]
     }
 
     input UpdateUserInput {
@@ -37,6 +41,8 @@ export default gql`
       lastName: String
       role: Role
       jobsIds: [ID]
+      mentorsIds: [ID]
+      menteesIds: [ID]
     }
 
     input RegisterUserInput {
@@ -59,5 +65,7 @@ export default gql`
       removeJobs(id: ID!, jobs: [ID!]!): User!
       register(input: RegisterUserInput!): AuthPayload
       login(email: String!, password: String!): AuthPayload
+      addMentor(id: ID!, mentorId: ID!): User!
+      removeMentor(id: ID!, mentorId: ID!): User!
     }
 `;

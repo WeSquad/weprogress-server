@@ -27,10 +27,12 @@ export default {
       return User.findById(assessment.userId);
     }
   },
+  AssessmentAxe: {
+    axe(assessmentAxe) {
+      return Axe.findById(assessmentAxe.axeId);
+    }
+  },
   AssessmentSkill: {
-    axe(assessmentSkill) {
-      return Axe.findById(assessmentSkill.axeId);
-    },
     skill(assessmentSkill) {
       return Skill.findById(assessmentSkill.skillId);
     }

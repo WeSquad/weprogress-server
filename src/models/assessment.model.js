@@ -7,11 +7,15 @@ import mongoose from 'mongoose';
 export const AssessmentSchema = mongoose.Schema(
   {
     userId: mongoose.Schema.Types.ObjectId,
-    assessmentSkills: [
+    axes: [
       {
-        skillId: mongoose.Schema.Types.ObjectId,
-        skillRate: Number,
-        axeId: mongoose.Schema.Types.ObjectId
+        axeId: mongoose.Schema.Types.ObjectId,
+        skills: [
+          {
+            skillId: mongoose.Schema.Types.ObjectId,
+            skillRate: Number
+          }
+        ]
       }
     ]
   },
