@@ -29,7 +29,6 @@ export default gql`
       firstName: String
       lastName: String
       password: String
-      role: Role
       jobsIds: [ID]
       mentorsIds: [ID]
       menteesIds: [ID]
@@ -39,10 +38,10 @@ export default gql`
       email: String
       firstName: String
       lastName: String
-      role: Role
       jobsIds: [ID]
       mentorsIds: [ID]
       menteesIds: [ID]
+      password: String
     }
 
     input RegisterUserInput {
@@ -63,8 +62,9 @@ export default gql`
       updateUser(id: ID!, input: UpdateUserInput!): User!
       addJobs(id: ID!, jobs: [ID!]!): User!
       removeJobs(id: ID!, jobs: [ID!]!): User!
+      setJobs(id: ID!, jobsIds: [ID]): User!
       register(input: RegisterUserInput!): AuthPayload
-      login(email: String!, password: String!): AuthPayload
+      login(email: String!, password: String!, rememberme:Boolean): AuthPayload
       addMentor(id: ID!, mentorId: ID!): User!
       removeMentor(id: ID!, mentorId: ID!): User!
     }

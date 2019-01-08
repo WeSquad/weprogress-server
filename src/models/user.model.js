@@ -41,6 +41,24 @@ UserSchema.pre('save', async function save(next) {
   }
 });
 
+UserSchema.pre('findOneAndUpdate', async function(next) {
+  const updates = this.getUpdate();
+
+  if (!this.getUpdate().password || this.getUpdate().password === null || this.getUpdate().password === '') {
+    const { password, ...withOutPassword } = updates;
+    this.setUpdate(withOutPassword);
+    return next();
+  }
+
+  try {
+    const newpassword = await bcrypt.hash(this.getUpdate().password, 10);
+    this.setUpdate({ ...updates, password: newpassword });
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
 UserSchema.methods.validatePassword = async function validatePassword(data) {
   return bcrypt.compare(data, this.password);
 };

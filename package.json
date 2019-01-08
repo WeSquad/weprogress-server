@@ -1,12 +1,13 @@
 {
   "name": "weprogress-server",
   "version": "0.0.1",
+  "private": true,
   "author": "Nicolas Pinon",
   "main": "src/server.js",
   "scripts": {
     "build": "babel src --out-dir dist",
-    "restart": "rimraf dist && npm run build && npm run start",
-    "dev": "nodemon --exec npm run restart",
+    "restart": "rimraf dist && yarn run build && yarn run start",
+    "dev": "nodemon --exec yarn run restart",
     "start": "node dist/server"
   },
   "dependencies": {

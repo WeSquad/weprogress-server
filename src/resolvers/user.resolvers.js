@@ -15,7 +15,7 @@ export default {
     },
     me: async (_, args, context) => {
       if (!context.user) {
-        throw new UserInputError('No such user found.');
+        throw new ForbiddenError('No such user found.');
       }
 
       return context.user;
@@ -32,26 +32,37 @@ export default {
 
       return User.create(args.input);
     },
-    updateUser: async (_, args) => {
-      return User.findOneAndUpdate(args.id, args.input, { new: true });
+    updateUser: async (_, args, context) => {
+      if (!context.user) {
+        throw new ForbiddenError('No such user found.');
+      }
+
+      if (context.id !== args.id && context.user.role !== 'admin') {
+        throw new ForbiddenError('Forbidden.');
+      }
+
+      return User.findOneAndUpdate({ _id: args.id }, args.input, { new: true });
     },
     addJobs: async (_, args) => {
-      return User.findByIdAndUpdate({ _id: args.id }, { $addToSet: { jobsIds: args.jobs } }, { new: true })
+      return User.findByIdAndUpdate({ _id: args.id }, { $addToSet: { jobsIds: args.jobs } }, { new: true });
     },
     removeJobs: async (_, args) => {
-      return User.findByIdAndUpdate({ _id: args.id }, { $pull: { jobsIds: { $in: args.jobs } } }, { new: true })
+      return User.findByIdAndUpdate({ _id: args.id }, { $pull: { jobsIds: { $in: args.jobs } } }, { new: true });
+    },
+    setJobs: async (_, args) => {
+      return User.findOneAndUpdate({ _id: args.id }, { $set: { 'jobsIds': args.jobsIds } }, { new: true });
     },
     addMentor: async (_, args) => {
       const mentor = await User.findByIdAndUpdate({ _id: args.mentorId }, { $addToSet: { menteesIds: args.id } }, { new: true });
-      return User.findByIdAndUpdate({ _id: args.id }, { $addToSet: { mentorsIds: args.mentorId } }, { new: true })
+      return User.findByIdAndUpdate({ _id: args.id }, { $addToSet: { mentorsIds: args.mentorId } }, { new: true });
     },
     removeMentor: async (_, args) => {
-      const mentor = await User.findByIdAndUpdate({ _id: args.mentorId }, { $pull: { menteesIds: { $in: args.id } } }, { new: true })
-      return User.findByIdAndUpdate({ _id: args.id }, { $pull: { mentorsIds: { $in: args.mentorId } } }, { new: true })
+      const mentor = await User.findByIdAndUpdate({ _id: args.mentorId }, { $pull: { menteesIds: { $in: args.id } } }, { new: true });
+      return User.findByIdAndUpdate({ _id: args.id }, { $pull: { mentorsIds: { $in: args.mentorId } } }, { new: true });
     },
     register: async (_, args) => {
       const user = User.create(args.input);
-      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: '7d' });
+      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: '1d' });
 
       return {
         token,
@@ -69,7 +80,9 @@ export default {
         throw new AuthenticationError('Invalid password.');
       }
 
-      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: '7d' });
+      const expiresIn = (args.rememberme === true) ? '30d' : '1d';
+
+      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: expiresIn });
 
       return {
         token,
