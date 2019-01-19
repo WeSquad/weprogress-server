@@ -8,7 +8,13 @@
     "build": "babel src --out-dir dist",
     "restart": "rimraf dist && yarn run build && yarn run start",
     "dev": "nodemon --exec yarn run restart",
-    "start": "node dist/server"
+    "start": "node dist/server",
+    "test": "jest"
+  },
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "node",
+    "setupTestFrameworkScriptFile": "./test/setup.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
@@ -18,7 +24,9 @@
     "express": "^4.16.4",
     "graphql": "^14.0.2",
     "graphql-codegen-core": "^0.15.0",
+    "graphql-tag": "^2.10.0",
     "jsonwebtoken": "^8.4.0",
+    "mongodb": "^3.1.12",
     "mongoose": "^5.4.0",
     "rimraf": "^2.6.2"
   },
@@ -27,10 +35,15 @@
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/register": "^7.0.0",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^23.6.0",
     "babel-plugin-graphql-tag": "^1.6.0",
     "babel-plugin-import-graphql": "^2.6.2",
+    "cross-env": "^5.2.0",
     "graphql-import": "^0.7.1",
+    "jest": "^23.6.0",
     "nodemon": "^1.18.9"
   }
 }

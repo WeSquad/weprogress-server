@@ -5,11 +5,25 @@ export default gql`
       id: ID!
       name: String!
       multiplier: Float
+      wishes: Wishes
+    }
+
+    type Wishes {
+      training: Boolean
+      interest: Boolean
+      noMore: Boolean
     }
 
     input SkillInput {
       name: String!
       multiplier: Float
+      wishes: WishesInput
+    }
+
+    input WishesInput {
+      training: Boolean
+      interest: Boolean
+      noMore: Boolean
     }
 
     extend type Query {

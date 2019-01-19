@@ -15,6 +15,21 @@ export const SkillSchema = mongoose.Schema(
     multiplier: {
       type: Number,
       default: 1
+    },
+    description: String,
+    wishes: {
+      training: {
+        type: Boolean,
+        default: false
+      },
+      interest: {
+        type: Boolean,
+        default: false
+      },
+      noMore: {
+        type: Boolean,
+        default: false
+      }
     }
   }
 );
