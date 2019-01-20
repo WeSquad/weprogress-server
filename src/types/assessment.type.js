@@ -16,6 +16,13 @@ export default gql`
     type AssessmentSkill {
       skill: Skill!
       skillRate: Float!
+      wishes: Wishes
+    }
+
+    type Wishes {
+      training: Boolean
+      interest: Boolean
+      noMore: Boolean
     }
 
     type AssessmentRate {
@@ -38,6 +45,13 @@ export default gql`
     input CreateAssessmentSkillInput {
       skillId: ID!
       skillRate: Float!
+      wishes: WishesInput
+    }
+
+    input WishesInput {
+      training: Boolean
+      interest: Boolean
+      noMore: Boolean
     }
 
     extend type Query {

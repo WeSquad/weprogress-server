@@ -13,7 +13,21 @@ export const AssessmentSchema = mongoose.Schema(
         skills: [
           {
             skillId: mongoose.Schema.Types.ObjectId,
-            skillRate: Number
+            skillRate: Number,
+            wishes: {
+              training: {
+                type: Boolean,
+                default: false
+              },
+              interest: {
+                type: Boolean,
+                default: false
+              },
+              noMore: {
+                type: Boolean,
+                default: false
+              }
+            }
           }
         ]
       }
