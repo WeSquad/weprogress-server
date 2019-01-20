@@ -5,6 +5,7 @@ export default gql`
       id: ID!
       name: String!
       multiplier: Float
+      description: String
       wishes: Wishes
     }
 
@@ -17,6 +18,7 @@ export default gql`
     input SkillInput {
       name: String!
       multiplier: Float
+      description: String
       wishes: WishesInput
     }
 

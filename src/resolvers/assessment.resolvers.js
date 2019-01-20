@@ -12,6 +12,30 @@ export default {
     },
     assessment: async (_, args) => {
       return Assessment.findById(args.id);
+    },
+    assessmentRates: async (_, args) => {
+      let result = await Assessment.findById(args.id);
+
+      var axes = [];
+
+      await Promise.all(result.axes.map(async (axeArray) => {
+        let axe = await Axe.findById(axeArray.axeId);
+        var skillsCount = 0;
+        axeArray.skills.map(skill => {
+          skillsCount = skillsCount + skill.skillRate;
+        });
+
+        var axeRate = {
+          "name": axe.name,
+          "skillsTotal": axeArray.skills.length * 4,
+          "skillsCount": skillsCount,
+          "axePourcent": (skillsCount / (axeArray.skills.length * 4)) * 100
+        };
+
+        axes.push(axeRate);
+      }));
+
+      return axes;
     }
   },
   Mutation: {

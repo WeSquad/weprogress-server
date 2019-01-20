@@ -18,9 +18,16 @@ export default gql`
       skillRate: Float!
     }
 
+    type AssessmentRate {
+      name: String
+      skillsTotal: Float
+      skillsCount: Float
+      axePourcent: Float
+    }
+
     input CreateAssessmentInput {
       userId: ID!
-      axes: [CreateAssessmentSkillInput]
+      axes: [CreateAssessmentAxeInput]
     }
 
     input CreateAssessmentAxeInput {
@@ -37,6 +44,7 @@ export default gql`
       assessments: [Assessment]
       assessmentsByUser(user: ID!): [Assessment]
       assessment(id: ID!): Assessment
+      assessmentRates(id: ID!): [AssessmentRate]
     }
 
     extend type Mutation {
