@@ -1,9 +1,11 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
+    scalar Date
+
     type Assessment {
       id: ID!
-      createdAt: String!
+      createdAt: Date!
       user: User!
       axes: [AssessmentAxe]
     }
@@ -56,7 +58,7 @@ export default gql`
 
     extend type Query {
       assessments: [Assessment]
-      assessmentsByUser(user: ID!): [Assessment]
+      assessmentsByUser(userId: ID!, limit: Float): [Assessment]
       assessment(id: ID!): Assessment
       assessmentRates(id: ID!): [AssessmentRate]
     }

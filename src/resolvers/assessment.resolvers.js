@@ -1,20 +1,49 @@
 import { Assessment, User, Axe, Skill } from '../models';
+import { ApolloError } from 'apollo-server-core';
+import { GraphQLScalarType, Kind } from 'graphql';
 
 export default {
+  Date: new GraphQLScalarType({
+    name: 'Date',
+    description: 'Date custom scalar type',
+    parseValue(value) {
+      return new Date(value); // value from the client
+    },
+    serialize(value) {
+      return value.getTime(); // value sent to the client
+    },
+    parseLiteral(ast) {
+      if (ast.kind === Kind.INT) {
+        return parseInt(ast.value, 10); // ast value is always in string format
+      }
+      return null;
+    },
+  }),
   Query: {
     assessments: async () => {
       return Assessment.find({});
     },
     assessmentsByUser: async (_, args) => {
-      return Assessment.find({
-        'userId': args.id
+      const assessments = Assessment.find({
+        'userId': args.userId
       })
+      .sort({'updatedAt': -1});
+
+      if (args.limit) {
+        assessments.limit(args.limit);
+      }
+
+      return assessments;
     },
     assessment: async (_, args) => {
       return Assessment.findById(args.id);
     },
     assessmentRates: async (_, args) => {
       let result = await Assessment.findById(args.id);
+
+      if (!result) {
+        throw new ApolloError('Assessment not found.', 'NOT_FOUND');
+      }
 
       var axes = [];
 

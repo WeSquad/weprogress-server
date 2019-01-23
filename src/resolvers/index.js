@@ -9,5 +9,5 @@ export default [
   axe,
   job,
   assessment,
-  user
+  user,
 ]
