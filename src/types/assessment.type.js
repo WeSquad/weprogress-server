@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
     scalar Date
+    scalar BsonID
 
     type Assessment {
       id: ID!
@@ -11,12 +12,14 @@ export default gql`
     }
 
     type AssessmentAxe {
-      axe: Axe!
+      axeId: BsonID
+      axeName: String!
       skills: [AssessmentSkill]
     }
 
     type AssessmentSkill {
-      skill: Skill!
+      skillId: BsonID
+      skillName: String!
       skillRate: Float!
       wishes: Wishes
     }

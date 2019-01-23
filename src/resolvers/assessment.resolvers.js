@@ -1,6 +1,7 @@
 import { Assessment, User, Axe, Skill } from '../models';
 import { ApolloError } from 'apollo-server-core';
 import { GraphQLScalarType, Kind } from 'graphql';
+import bson from 'bson';
 
 export default {
   Date: new GraphQLScalarType({
@@ -17,6 +18,29 @@ export default {
         return parseInt(ast.value, 10); // ast value is always in string format
       }
       return null;
+    },
+  }),
+  BsonID: new GraphQLScalarType({
+    name: 'BsonID',
+    description: 'ID custom scalar type for non _id fields',
+    serialize: String,
+    parseValue(value) {
+      const objectidPattern = "/^[0-9a-fA-F]{24}$/";
+
+      if (objectidPattern.test(value)) {
+        return bson.ObjectId(value);
+      }
+
+      throw new Error('ObjectId must be a single String of 24 hex characters');
+    },
+    parseLiteral(ast) {
+      const objectidPattern = /^[0-9a-fA-F]{24}$/;
+
+      if (objectidPattern.test(ast.value)) {
+        return bson.ObjectId(ast.value);
+      }
+
+      throw new Error('ObjectId must be a single String of 24 hex characters');
     },
   }),
   Query: {
@@ -81,13 +105,17 @@ export default {
     }
   },
   AssessmentAxe: {
-    axe(assessmentAxe) {
-      return Axe.findById(assessmentAxe.axeId);
+    async axeName(assessmentAxe) {
+      let axe = await Axe.findById(assessmentAxe.axeId);
+
+      return axe.name;
     }
   },
   AssessmentSkill: {
-    skill(assessmentSkill) {
-      return Skill.findById(assessmentSkill.skillId);
+    async skillName(assessmentSkill) {
+      let skill = await Skill.findById(assessmentSkill.skillId);
+
+      return skill.name;
     }
   }
 }
