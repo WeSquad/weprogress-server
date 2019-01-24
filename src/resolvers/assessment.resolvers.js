@@ -95,6 +95,9 @@ export default {
     createAssessment: async (_, args) => {
       return Assessment.create(args.input);
     },
+    updateAssessment: async (_, args) => {
+      return Assessment.findByIdAndUpdate({"_id": args.id}, args.input, { new: true });
+    },
     deleteAssessment: async (_, args) => {
       return Assessment.findByIdAndRemove(args.id);
     }

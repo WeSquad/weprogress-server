@@ -7,6 +7,7 @@ export default gql`
     type Assessment {
       id: ID!
       createdAt: Date!
+      updatedAt: Date
       user: User!
       axes: [AssessmentAxe]
     }
@@ -68,6 +69,7 @@ export default gql`
 
     extend type Mutation {
       createAssessment(input: CreateAssessmentInput!): Assessment!
+      updateAssessment(id: ID!, input:CreateAssessmentInput!): Assessment!
       deleteAssessment(id: ID!): Assessment!
     }
 `;
