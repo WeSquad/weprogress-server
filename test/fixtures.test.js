@@ -1,6 +1,6 @@
 import { User, Skill, Axe, Job } from '../src/models';
-import { POAxe1, POAxe2, POAxe3, POAxe4, POAxe5, POAxe6, POAxe7 } from './fixtures/skills.fixtures';
-import { POSkills1, POSkills2, POSkills3, POSkills4, POSkills5, POSkills6, POSkills7 } from './fixtures/skills.fixtures';
+import { POAxe1, POAxe2, POAxe3, POAxe4, POAxe5, POAxe6 } from './fixtures/skills.fixtures';
+import { POSkills1, POSkills2, POSkills3, POSkills4, POSkills5, POSkills6 } from './fixtures/skills.fixtures';
 import { ObjectID } from 'mongodb';
 
 describe('Create Users', function() {
@@ -144,26 +144,6 @@ describe('Create Jobs & Axes & Skills', function() {
 
     let createdAxe = await Axe.create({
       "name": POAxe6.name,
-    });
-    axeId = createdAxe._id;
-    axesIds.push(axeId);
-    expect(createdAxe._id).not.toBeNull();
-
-    let linked = await Axe.findByIdAndUpdate({ _id: axeId }, { $addToSet: { skillsIds: skillsIds } }, { new: true });
-    expect(linked.skillsIds).not.toBeNull();
-  });
-
-  test('should add axe 7 & skills 7', async () => {
-    skillsIds.length = 0;
-    POSkills7.map(async (skill) => {
-      let createdskill = await Skill.create(skill);
-      let generatedId = new ObjectID(createdskill._id);
-      skillsIds.push(generatedId);
-      expect(skillsIds).not.toBeNull();
-    });
-
-    let createdAxe = await Axe.create({
-      "name": POAxe7.name,
     });
     axeId = createdAxe._id;
     axesIds.push(axeId);

@@ -9,6 +9,7 @@ export default gql`
       createdAt: Date!
       updatedAt: Date
       user: User!
+      job: Job!
       axes: [AssessmentAxe]
     }
 
@@ -40,6 +41,7 @@ export default gql`
 
     input CreateAssessmentInput {
       userId: ID!
+      jobId: ID!
       axes: [CreateAssessmentAxeInput]
     }
 

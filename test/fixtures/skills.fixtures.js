@@ -49,11 +49,16 @@ export const POSkills1 = [
   { "name": "Esprit de synthèse" },
   { "name": "Formuler un problème avec clarté" },
   { "name": "Bonne expression écrite & orale" },
-  { "name": "Curiosité et envie d’apprendre" }
+  { "name": "Curiosité et envie d’apprendre" },
+  { "name": "Sait recevoir et apprend à donner du feed-back" },
 ];
 
 export const POSkills2 = [
+  { "name": "Analyser et optimiser les process agiles d'une équipe de développement" },
   { "name": "Traduire la stratégie d’entreprise en vision produit" },
+  { "name": "Construire un LEAN Canvas" },
+  { "name": "Construire un Business Canvas" },
+  { "name": "Sait identifier dans quelle étape du le cycle de vie d'un produit est son produit" },
   { "name": "Utiliser un Impact Mapping" },
   { "name": "Utiliser un Elevator Pitch" },
   { "name": "Définir un Product Market Fit" },
@@ -102,22 +107,13 @@ export const POSkills5 = [
 ];
 
 export const POSkills6 = [
-  { "name": "Analyser et optimiser les process agiles d'une équipe de développement" },
   { "name": "Écrit des articles de blog" },
   { "name": "Participe à des meetups" },
   { "name": "Construit des meetups" },
   { "name": "Organise des KS" },
-  { "name": "Participe aux KS" }
-];
-
-export const POSkills7 = [
+  { "name": "Participe aux KS" },
+  { "name": "Speaker à des conférences" },
   { "name": "Embrasser le changement" },
-  { "name": "Ne pas être intimidé par l’ingénierie logicielle" },
-  { "name": "Sait faire preuve d'écoute" },
-  { "name": "Avoir une approche analytique" },
-  { "name": "Fait de la veille technologique / méthodo (Lecture d'articles, events etc.)" },
-  { "name": "Sait et demande de l'aide" },
-  { "name": "Sait recevoir et apprend à donner du feed-back" },
   { "name": "Tire bénéfice des échanges avec son mentor" },
   { "name": "Avoir le mindset Wemanity (acteur vs consommateur, doers, ...)" },
   { "name": "Connaît le positionnement de Wemanity" }
@@ -144,9 +140,5 @@ export const POAxe5 = {
 }
 
 export const POAxe6 = {
-  "name" : "Agiliste Wemanity (transformation)"
-}
-
-export const POAxe7 = {
-  "name" : "Les savoirs être Wemanity"
+  "name" : "Agiliste / Savoir être Wemanity"
 }

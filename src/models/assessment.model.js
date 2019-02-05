@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 export const AssessmentSchema = mongoose.Schema(
   {
     userId: mongoose.Schema.Types.ObjectId,
+    jobId: mongoose.Schema.Types.ObjectId,
     axes: [
       {
         axeId: mongoose.Schema.Types.ObjectId,

@@ -1,4 +1,4 @@
-import { Assessment, User, Axe, Skill } from '../models';
+import { Assessment, User, Axe, Skill, Job } from '../models';
 import { ApolloError } from 'apollo-server-core';
 import { GraphQLScalarType, Kind } from 'graphql';
 import bson from 'bson';
@@ -105,6 +105,9 @@ export default {
   Assessment: {
     user(assessment) {
       return User.findById(assessment.userId);
+    },
+    job(assessment) {
+      return Job.findById(assessment.jobId);
     }
   },
   AssessmentAxe: {
