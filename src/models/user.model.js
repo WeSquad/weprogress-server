@@ -15,6 +15,7 @@ export const UserSchema = mongoose.Schema({
   },
   firstName: String,
   lastName: String,
+  picture: String,
   role: {
     type: String,
     enum: Object.keys(roles),

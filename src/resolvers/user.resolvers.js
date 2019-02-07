@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 import { User, Job } from '../models';
-import { AuthenticationError, UserInputError, ForbiddenError } from 'apollo-server-express';
+import { UserInputError, ForbiddenError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 import { adminValidate } from '../services';
 import { OAuth2Client } from 'google-auth-library';
@@ -35,10 +35,10 @@ export default {
     },
     updateUser: async (_, args, context) => {
       if (!context.user) {
-        throw new ForbiddenError('No such user found.');
+        throw new UserInputError('No such user found.');
       }
 
-      if (context.id !== args.id && context.user.role !== 'admin') {
+      if (context.user.id !== args.id && context.user.role !== 'admin') {
         throw new ForbiddenError('Forbidden.');
       }
 
@@ -70,9 +70,10 @@ export default {
       const payload = ticket.getPayload();
 
       // Only Wemanity is authorize
+      /*
       if (payload["hd"] !== "wemanity.com") {
         throw new ForbiddenError('Only wemanity is allowed to use WeProgress.');
-      }
+      }*/
 
       var user = await User.findOne({"email": payload["email"]});
 
@@ -80,7 +81,8 @@ export default {
         user = await User.create({
           email: payload["email"],
           firstName: payload["given_name"],
-          lastName: payload["family_name"]
+          lastName: payload["family_name"],
+          picture: payload["picture"]? payload["picture"] : ""
         });
       }
 
