@@ -4,6 +4,7 @@ import { User, Job } from '../models';
 import { AuthenticationError, UserInputError, ForbiddenError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 import { adminValidate } from '../services';
+import { OAuth2Client } from 'google-auth-library';
 
 export default {
   Query: {
@@ -60,29 +61,31 @@ export default {
       const mentor = await User.findByIdAndUpdate({ _id: args.mentorId }, { $pull: { menteesIds: { $in: args.id } } }, { new: true });
       return User.findByIdAndUpdate({ _id: args.id }, { $pull: { mentorsIds: { $in: args.mentorId } } }, { new: true });
     },
-    register: async (_, args) => {
-      const user = User.create(args.input);
-      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: '1d' });
+    glogin: async (_, args) => {
+      const gclient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+      const ticket = await gclient.verifyIdToken({
+        idToken: args.token,
+        audience: process.env.GOOGLE_CLIENT_ID,
+      });
+      const payload = ticket.getPayload();
 
-      return {
-        token,
-        user,
+      // Only Wemanity is authorize
+      if (payload["hd"] !== "wemanity.com") {
+        throw new ForbiddenError('Only wemanity is allowed to use WeProgress.');
       }
-    },
-    login: async (_, args) => {
-      const user = await User.findOne({"email": args.email});
+
+      var user = await User.findOne({"email": payload["email"]});
+
       if (!user) {
-        throw new UserInputError('No such user found.');
+        user = await User.create({
+          email: payload["email"],
+          firstName: payload["given_name"],
+          lastName: payload["family_name"]
+        });
       }
 
-      const valid = await user.validatePassword(args.password);
-      if (!valid) {
-        throw new AuthenticationError('Invalid password.');
-      }
-
-      const expiresIn = (args.rememberme === true) ? '30d' : '1d';
-
-      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: expiresIn });
+      // To improve : use google exp as expirein of the jwt
+      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: "30d" });
 
       return {
         token,

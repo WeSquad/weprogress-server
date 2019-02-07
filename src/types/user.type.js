@@ -63,8 +63,7 @@ export default gql`
       addJobs(id: ID!, jobs: [ID!]!): User!
       removeJobs(id: ID!, jobs: [ID!]!): User!
       setJobs(id: ID!, jobsIds: [ID]): User!
-      register(input: RegisterUserInput!): AuthPayload
-      login(email: String!, password: String!, rememberme:Boolean): AuthPayload
+      glogin(token: String!): AuthPayload
       addMentor(id: ID!, mentorId: ID!): User!
       removeMentor(id: ID!, mentorId: ID!): User!
     }
