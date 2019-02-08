@@ -70,10 +70,9 @@ export default {
       const payload = ticket.getPayload();
 
       // Only Wemanity is authorize
-      /*
       if (payload["hd"] !== "wemanity.com") {
         throw new ForbiddenError('Only wemanity is allowed to use WeProgress.');
-      }*/
+      }
 
       var user = await User.findOne({"email": payload["email"]});
 

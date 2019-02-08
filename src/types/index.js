@@ -3,6 +3,7 @@ import Assessment from './assessment.type';
 import Job from './job.type';
 import Axe from './axe.type';
 import Skill from './skill.type';
+import Notification from './notification.type';
 
 const Root = /* GraphQL */ `
 	# The dummy queries and mutations are necessary because
@@ -27,6 +28,7 @@ const Root = /* GraphQL */ `
 
 export default [
   Root,
+  Notification,
   Skill,
   Axe,
   Job,
