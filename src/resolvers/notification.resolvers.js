@@ -1,12 +1,21 @@
 import { Notification } from '../models';
+import { ForbiddenError } from 'apollo-server-express';
 
 export default {
   Query: {
-    notifications: (_, args) => {
-      return Notification.find({"userId": args.userId});
+    notifications: (_, args, context) => {
+      if (!context.user) {
+        throw new ForbiddenError('No such user found.');
+      }
+
+      return Notification.find({"userId": context.user.id});
     },
-    unReadNotifications: (_, args) => {
-      return Notification.find({"userId": args.userId, "read": false});
+    unReadNotifications: (_, args, context) => {
+      if (!context.user) {
+        throw new ForbiddenError('No such user found.');
+      }
+
+      return Notification.find({"userId": context.user.id, "read": false});
     },
   },
   Mutation: {

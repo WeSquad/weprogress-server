@@ -1,5 +1,6 @@
 import User from './user.model';
 import Assessment from './assessment.model';
+import SharedAssessment from './sharedassessment.model';
 import Job from './job.model';
 import Axe from './axe.model';
 import Skill from './skill.model';
@@ -11,5 +12,6 @@ export {
   Axe,
   Job,
   Assessment,
+  SharedAssessment,
   User
 };

@@ -13,8 +13,8 @@ export default gql`
   }
 
   extend type Query {
-    notifications(userId: ID!): [Notification]
-    unReadNotifications(userId: ID!): [Notification]
+    notifications: [Notification]
+    unReadNotifications: [Notification]
   }
 
   extend type Mutation {

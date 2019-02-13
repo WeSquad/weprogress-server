@@ -1,5 +1,6 @@
 import User from './user.type';
 import Assessment from './assessment.type';
+import SharedAssessment from './sharedassessment.type';
 import Job from './job.type';
 import Axe from './axe.type';
 import Skill from './skill.type';
@@ -33,5 +34,6 @@ export default [
   Axe,
   Job,
   Assessment,
+  SharedAssessment,
   User
 ];
