@@ -19,6 +19,6 @@ export default gql`
 
   extend type Mutation {
     createNotification(input: CreateNotificationInput!): Notification!
-    readNotification(id: ID!): Notification!
+    readNotification(ids: [ID]!): [Notification]!
   }
 `;

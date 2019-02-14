@@ -8,22 +8,24 @@ export default {
         throw new ForbiddenError('No such user found.');
       }
 
-      return Notification.find({"userId": context.user.id});
+      return Notification.find({"userId": context.user.id}).sort([['updatedAt', 'descending']]);
     },
     unReadNotifications: (_, args, context) => {
       if (!context.user) {
         throw new ForbiddenError('No such user found.');
       }
 
-      return Notification.find({"userId": context.user.id, "read": false});
+      return Notification.find({"userId": context.user.id, "read": false}).sort([['updatedAt', 'descending']]);
     },
   },
   Mutation: {
     createNotification: (_, args) => {
       return Notification.create(args.input);
     },
-    readNotification: (_, args) => {
-      return Notification.findOneAndUpdate({ _id: args.id }, {"read": true}, { new: true });
+    readNotification: async (_, args) => {
+      await Notification.updateMany({ _id: { $in: args.ids } }, { $set: { "read": true } });
+
+      return Notification.find({ "_id": args.ids }).sort([['updatedAt', 'descending']]);
     },
   }
 }
