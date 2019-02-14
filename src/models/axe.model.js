@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
   Axe Model
 */
 
+export const axesTypes = { softSkills: 'softSkills', hardSkills: 'hardSkills', wemanity: 'wemanity' };
+
 export const AxeSchema = mongoose.Schema(
   {
     name: {
@@ -12,7 +14,11 @@ export const AxeSchema = mongoose.Schema(
       trim: true,
       unique: true
     },
-    skillsIds: [mongoose.Schema.Types.ObjectId]
+    skillsIds: [mongoose.Schema.Types.ObjectId],
+    type: {
+      type: String,
+      enum: Object.keys(axesTypes),
+    },
   }
 );
 

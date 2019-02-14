@@ -93,7 +93,7 @@ export const POSkills4 = [
   { "name": "Utilise des Analytics"},
 ];
 
-export const POSkills6 = [
+export const POSkills5 = [
   { "name": "Les notions de Design Pattern"},
   { "name": "HTML / CSS"},
   { "name": "REST"},
@@ -104,7 +104,7 @@ export const POSkills6 = [
   { "name": "Les bases des languages mobiles (Swift / Android)"},
 ];
 
-export const POSkills7 = [
+export const POSkills6 = [
   { "name": "SCRUM" },
   { "name": "KABAN" },
   { "name": "eXtreme Programming" },
@@ -121,7 +121,7 @@ export const POSkills7 = [
   { "name": "Spotify model"}
 ];
 
-export const POSkills8 = [
+export const POSkills7 = [
   { "name": "Leadership" },
   { "name": "Embrasse le changement" },
   { "name": "Décisif" },
@@ -137,7 +137,7 @@ export const POSkills8 = [
   { "name": "Pédagogue" },
 ]
 
-export const POSkills9 = [
+export const POSkills8 = [
   { "name": "Écrit des articles de blog" },
   { "name": "Participe à des meetups" },
   { "name": "Organise / Construit des meetups" },
@@ -153,33 +153,41 @@ export const POSkills9 = [
 ];
 
 export const POAxe1 = {
-  "name": "Product Owner"
+  "name": "Product Owner",
+  "type": "hardSkills"
 }
 
 export const POAxe2 = {
-  "name": "Product Strategy"
+  "name": "Product Strategy",
+  "type": "hardSkills"
 }
 
 export const POAxe3 = {
-  "name": "Product Design"
+  "name": "Product Design",
+  "type": "hardSkills"
 }
 
 export const POAxe4 = {
-  "name": "Product Growth / Data"
+  "name": "Product Growth / Data",
+  "type": "hardSkills"
+}
+
+export const POAxe5 = {
+  "name": "Product Tech",
+  "type": "hardSkills"
 }
 
 export const POAxe6 = {
-  "name": "Product Tech"
+  "name": "Frameworks",
+  "type": "hardSkills"
 }
 
 export const POAxe7 = {
-  "name": "Frameworks"
+  "name": "Soft skills",
+  "type": "softSkills"
 }
 
 export const POAxe8 = {
-  "name": "Soft skills"
-}
-
-export const POAxe9 = {
-  "name": "Wemanity"
+  "name": "Wemanity",
+  "type": "wemanity"
 }
