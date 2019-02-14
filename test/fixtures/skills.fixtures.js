@@ -1,59 +1,56 @@
 export const POSkills1 = [
+  { "name": "Connaitre les concepts de management visuel" },
+  { "name": "Représenter les utilisateurs" },
+  { "name": "Collaborer avec l'équipe de développement" },
   { "name": "Comprendre le produit" },
   { "name": "Savoir identifier la notion de valeur métier" },
   { "name": "Savoir utiliser un Burndown chart" },
-  { "name": "Savoir organiser un atelier métier" },
-  { "name": "Définir et respecter une DoR (Definition of Ready)" },
-  { "name": "Comprendre l'organisation" },
-  { "name": "Assimiler l'écosystème" },
-  { "name": "Représenter les utilisateurs" },
-  { "name": "Comprendre et utiliser les notions de vélocité" },
-  { "name": "Savoir animer un raffinement de backlog" },
-  { "name": "Comprendre le métier de l'organisation" },
-  { "name": "Connaitre les concepts de management visuel" },
   { "name": "Savoir utiliser un Burn up chart" },
-  { "name": "Ecrire des User Stories INVEST" },
-  { "name": "Savoir découper des US basiquement (3 manières)" },
+  { "name": "Comprendre et utiliser les notions de vélocité" },
+  { "name": "Définir et respecter une DoR (Definition of Ready)" },
+  { "name": "Pouvoir aider à définir des DoD (Definition of Done)" },
+  { "name": "Savoir animer un raffinement de backlog" },
   { "name": "Savoir animer une Sprint Review" },
-  { "name": "Pouvoir aider à définir des DoD" },
   { "name": "Savoir préparer un sprint planning" },
-  { "name": "Collaborer avec l'équipe de développement" },
-  { "name": "Ecrire des critères d'acceptation" },
   { "name": "Savoir animer un Sprint planning" },
-  { "name": "Est polyglotte : savoir adapter son discours en fonction des interlocuteurs" },
-  { "name": "Animer un Story Mapping" },
-  { "name": "Savoir dire NON" },
-  { "name": "Savoir négocier" },
+  { "name": "Ecrire des User Stories INVEST" },
+  { "name": "Ecrire des critères d'acceptation" },
+  { "name": "Savoir découper des US basiquement (3 manières)" },
+  { "name": "Adapte sa découpe d'US en fonction de l'équipe et l'environnement (7 techniques au moins)" },
+  { "name": "Priorisation par la valeur Business"},
+  { "name": "Priorisation par la méthode MOSCOW"},
+  { "name": "Priorisation par la méthode KANO"},
+  { "name": "Priorisation avec un atelier Buy a Feature"},
+  { "name": "L'Exemple mapping" },
+  { "name": "Le Story Mapping" },
   { "name": "Connaitre et utiliser le concept de MMF" },
   { "name": "Construire une roadmap" },
-  { "name": "Etre ROIste" },
-  { "name": "Etre pédagogue" },
-  { "name": "Animer un atelier métier" },
+  { "name": "ROIste" },
   { "name": "Comprendre une architecture logique" },
   { "name": "Cadencer les releases" },
   { "name": "S’interroger sur la valeur du produit" },
   { "name": "Gestion de conflit" },
-  { "name": "Faire preuve de Leadership" },
   { "name": "Connaitre les concepts de BDD" },
   { "name": "Appliquer le BDD dans ses critères d'acceptation" },
   { "name": "Connaitre les concepts de TDD" },
   { "name": "Utiliser de l'ATDD dans ses critères d'acceptation" },
-  { "name": "Construire une vision produit" },
-  { "name": "Féderer autour d'une vision produit" },
+  { "name": "Construire une Vision produit" },
+  { "name": "Féderer autour d'une Vision produit" },
+  { "name": "Construire une Product Box" },
   { "name": "Etre provocant quand il faut" },
   { "name": "Compréhension des enjeux du DevOps" },
   { "name": "Créer et utiliser du matériel d'animation" },
   { "name": "Définir et utiliser les vraies notions du MVP" },
   { "name": "Gérer les notions de valeur produit" },
-  { "name": "Connait au moins 7 techniques de découpe d'une US" },
   { "name": "Esprit de synthèse" },
   { "name": "Formuler un problème avec clarté" },
   { "name": "Bonne expression écrite & orale" },
-  { "name": "Curiosité et envie d’apprendre" },
   { "name": "Sait recevoir et apprend à donner du feed-back" },
 ];
 
 export const POSkills2 = [
+  { "name": "Comprendre l'organisation" },
+  { "name": "Assimiler l'écosystème" },
   { "name": "Analyser et optimiser les process agiles d'une équipe de développement" },
   { "name": "Traduire la stratégie d’entreprise en vision produit" },
   { "name": "Construire un LEAN Canvas" },
@@ -63,24 +60,24 @@ export const POSkills2 = [
   { "name": "Utiliser un Elevator Pitch" },
   { "name": "Définir un Product Market Fit" },
   { "name": "Construire une roadmap multi produits" },
-  { "name": "Fail fast" }
+  { "name": "Fail fast" },
 ];
 
 export const POSkills3 = [
-  { "name": "Savoir créer un prototype" },
-  { "name": "Savoir réaliser une maquette" },
   { "name": "Avoir des notions d'UX" },
+  { "name": "Créer un prototype" },
+  { "name": "Réaliser une maquette" },
   { "name": "Utiliser un Empathie Map" },
+  { "name": "Le Design Sprint" },
   { "name": "Crazy 8" },
   { "name": "One big idea" },
-  { "name": "Utiliser le Design Sprint" },
   { "name": "5 Why" },
   { "name": "Définir un Hook Canvas" },
   { "name": "Construire un Persona" },
-  { "name": "Exploiter un persona" },
-  { "name": "Utiliser un Persona" },
+  { "name": "Exploiter un Persona" },
   { "name": "Organiser un atelier de Design Thinking" },
-  { "name": "Construire une User journey" }
+  { "name": "Construire une User journey" },
+  { "name": "Construire un atelier Jobs to be done" }
 ];
 
 export const POSkills4 = [
@@ -89,10 +86,25 @@ export const POSkills4 = [
   { "name": "Le Growth Process"},
   { "name": "Identifiez les meilleurs canaux d’acquisition (Bullseye)"},
   { "name": "Déterminer les métriques d’acquisition" },
-  { "name": "Méthode BRASS" }
+  { "name": "Méthode BRASS" },
+  { "name": "Créer des rêquetes SQL" },
+  { "name": "Créer des rapports" },
+  { "name": "Utilise et exploite les cohortes"},
+  { "name": "Utilise des Analytics"},
 ];
 
-export const POSkills5 = [
+export const POSkills6 = [
+  { "name": "Les notions de Design Pattern"},
+  { "name": "HTML / CSS"},
+  { "name": "REST"},
+  { "name": "Les APIs"},
+  { "name": "L'architecture microservice"},
+  { "name": "Les bases des languages front (JS, php)"},
+  { "name": "Les bases des languages back (C#, Java, C, etc.)"},
+  { "name": "Les bases des languages mobiles (Swift / Android)"},
+];
+
+export const POSkills7 = [
   { "name": "SCRUM" },
   { "name": "KABAN" },
   { "name": "eXtreme Programming" },
@@ -103,42 +115,71 @@ export const POSkills5 = [
   { "name": "Scrum of Scrum" },
   { "name": "Management 3.0" },
   { "name": "LEAN Startup" },
-  { "name": "Le cycle en V" }
+  { "name": "Le cycle en V" },
+  { "name": "Crystal Clear"},
+  { "name": "7 Flows"},
+  { "name": "Spotify model"}
 ];
 
-export const POSkills6 = [
+export const POSkills8 = [
+  { "name": "Leadership" },
+  { "name": "Embrasse le changement" },
+  { "name": "Décisif" },
+  { "name": "Empathique" },
+  { "name": "Rationnel", "description": "Sait prendre des décisions en faisant fit de l'affect." },
+  { "name": "A soif d'apprendre" },
+  { "name": "Versatile" },
+  { "name": "Empowering" },
+  { "name": "Remise en question" },
+  { "name": "Polyglotte : savoir adapter son discours en fonction des interlocuteurs" },
+  { "name": "Savoir dire NON" },
+  { "name": "Négociateur" },
+  { "name": "Pédagogue" },
+]
+
+export const POSkills9 = [
   { "name": "Écrit des articles de blog" },
   { "name": "Participe à des meetups" },
-  { "name": "Construit des meetups" },
+  { "name": "Organise / Construit des meetups" },
   { "name": "Organise des KS" },
   { "name": "Participe aux KS" },
+  { "name": "Propose des REX aux KS" },
   { "name": "Speaker à des conférences" },
-  { "name": "Embrasser le changement" },
   { "name": "Tire bénéfice des échanges avec son mentor" },
-  { "name": "Avoir le mindset Wemanity (acteur vs consommateur, doers, ...)" },
-  { "name": "Connaît le positionnement de Wemanity" }
+  { "name": "Organisateur OWD" },
+  { "name": "Organisateur OWW" },
+  { "name": "Donne des formations externes / internes" },
+  { "name": "Participe a des projets internes" },
 ];
 
 export const POAxe1 = {
-  "name" : "Les bases du Product Ownership"
+  "name": "Product Owner"
 }
 
 export const POAxe2 = {
-  "name" : "Product Strategy"
+  "name": "Product Strategy"
 }
 
 export const POAxe3 = {
-  "name" : "Product Design"
+  "name": "Product Design"
 }
 
 export const POAxe4 = {
-  "name" : "Product Growth / Data"
-}
-
-export const POAxe5 = {
-  "name" : "Frameworks"
+  "name": "Product Growth / Data"
 }
 
 export const POAxe6 = {
-  "name" : "Agiliste / Savoir être Wemanity"
+  "name": "Product Tech"
+}
+
+export const POAxe7 = {
+  "name": "Frameworks"
+}
+
+export const POAxe8 = {
+  "name": "Soft skills"
+}
+
+export const POAxe9 = {
+  "name": "Wemanity"
 }
