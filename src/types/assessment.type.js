@@ -64,7 +64,8 @@ export default gql`
 
     extend type Query {
       assessments: [Assessment]
-      assessmentsByUser(userId: ID!, limit: Float): [Assessment]
+      myAssessments(limit: Float): [Assessment]!
+      assessmentsByUser(userId: ID!, limit: Float): [Assessment]!
       assessment(id: ID!): Assessment
       assessmentRates(id: ID!): [AssessmentRate]
     }

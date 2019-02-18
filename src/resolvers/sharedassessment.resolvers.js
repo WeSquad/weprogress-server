@@ -1,19 +1,11 @@
 import { SharedAssessment, Assessment, User } from '../models';
-import { adminValidate } from '../services';
-import { ForbiddenError } from 'apollo-server-express';
+import { ForbiddenError, ValidationError } from 'apollo-server-express';
 
 export default {
   Query: {
     sharedAssessmentsTo: async (_, args, context) => {
       if (!context.user) {
         throw new ForbiddenError('No such user found.');
-      }
-
-      // Check if user has admin access
-      const isAdmin = await adminValidate(context.user);
-
-      if (!isAdmin) {
-        return new ForbiddenError('Access restricted.');
       }
 
       return SharedAssessment.find({"toId": context.user.id});
@@ -33,7 +25,17 @@ export default {
     }
   },
   Mutation: {
-    createSharedAssessment: (_, args) => {
+    createSharedAssessment: async (_, args, context) => {
+      let existingAssessment = await SharedAssessment.findOne({"toId": args.input.toId, "assessmentId": args.input.assessmentId});
+
+      if (existingAssessment) {
+        throw new ValidationError("Assessment déjà partagé avec cet utilisateur.")
+      }
+
+      if (context.user.id === args.input.toId) {
+        throw new ForbiddenError("Impossible à partager avec vous-même");
+      }
+
       return SharedAssessment.create(args.input);
     },
     updateSharedAssessment: (_, args) => {

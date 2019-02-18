@@ -13,7 +13,6 @@ export default gql`
       lastName: String
       fullName: String
       picture: String
-      password: String!
       role: Role!
       jobs: [Job]
       mentors: [User]

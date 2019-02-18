@@ -1,5 +1,6 @@
 import { Assessment, User, Axe, Skill, Job } from '../models';
 import { ApolloError } from 'apollo-server-core';
+import { ForbiddenError, ValidationError } from 'apollo-server-express';
 import { GraphQLScalarType, Kind } from 'graphql';
 import bson from 'bson';
 
@@ -47,7 +48,23 @@ export default {
     assessments: async () => {
       return Assessment.find({});
     },
-    assessmentsByUser: async (_, args) => {
+    myAssessments: (_, args, context) => {
+      if (!context.user) {
+        throw new ForbiddenError('No such user found.');
+      }
+
+      const assessments = Assessment.find({
+        'userId': context.user.id
+      })
+      .sort({'updatedAt': -1});
+
+      if (args.limit) {
+        assessments.limit(args.limit);
+      }
+
+      return assessments;
+    },
+    assessmentsByUser: (_, args) => {
       const assessments = Assessment.find({
         'userId': args.userId
       })

@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   type SharedAssessment {
+    id: ID!
     from: User!
     to: User!
     assessment: Assessment!
