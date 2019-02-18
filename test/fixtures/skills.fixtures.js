@@ -137,6 +137,7 @@ export const POSkills7 = [
   { "name": "Pédagogue" },
 ]
 
+/*
 export const POSkills8 = [
   { "name": "Écrit des articles de blog" },
   { "name": "Participe à des meetups" },
@@ -150,7 +151,7 @@ export const POSkills8 = [
   { "name": "Organisateur OWW" },
   { "name": "Donne des formations externes / internes" },
   { "name": "Participe a des projets internes" },
-];
+];*/
 
 export const POAxe1 = {
   "name": "Product Owner",
@@ -187,7 +188,8 @@ export const POAxe7 = {
   "type": "softSkills"
 }
 
+/*
 export const POAxe8 = {
   "name": "Wemanity",
   "type": "wemanity"
-}
+}*/

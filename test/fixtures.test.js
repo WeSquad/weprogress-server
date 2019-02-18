@@ -176,6 +176,7 @@ describe('Create Jobs & Axes & Skills', function() {
     expect(linked.skillsIds).not.toBeNull();
   });
 
+  /*
   test('should add axe 8 & skills 8', async () => {
     var skillsIds = [];
 
@@ -196,7 +197,7 @@ describe('Create Jobs & Axes & Skills', function() {
 
     let linked = await Axe.findByIdAndUpdate({ _id: axeId }, { $addToSet: { skillsIds: skillsIds } }, { new: true });
     expect(linked.skillsIds).not.toBeNull();
-  });
+  });*/
 
   test('should create PO Job and link Axes', async () => {
     let createdJob = await Job.create({"name": "Product Owner", "axesIds": [...axesIds]});
