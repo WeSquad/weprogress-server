@@ -16,6 +16,7 @@ export default gql`
     type AssessmentAxe {
       axeId: BsonID
       axeName: String!
+      axeType: String!
       skills: [AssessmentSkill]
     }
 

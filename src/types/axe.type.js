@@ -4,11 +4,13 @@ export default gql`
     type Axe {
       id: ID!
       name: String!
+      type: String!
       skills: [Skill]
     }
 
     input AxeInput {
       name: String!
+      type: String
       skillsIds: [ID]
     }
 

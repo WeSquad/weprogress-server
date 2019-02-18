@@ -132,6 +132,11 @@ export default {
       let axe = await Axe.findById(assessmentAxe.axeId);
 
       return axe.name;
+    },
+    async axeType(assessmentAxe) {
+      let axe = await Axe.findById(assessmentAxe.axeId);
+
+      return axe.type;
     }
   },
   AssessmentSkill: {
