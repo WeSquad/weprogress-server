@@ -99,13 +99,36 @@ export default {
           "name": axe.name,
           "skillsTotal": axeArray.skills.length * 4,
           "skillsCount": skillsCount,
-          "axePourcent": (skillsCount / (axeArray.skills.length * 4)) * 100
+          "axePourcent": (skillsCount / (axeArray.skills.length * 4)) * 100,
+          "type": axe.type
         };
 
         axes.push(axeRate);
       }));
 
       return axes;
+    },
+    assessmentSoftSkillsRates: async (_, args) => {
+      let result = await Assessment.findById(args.id);
+
+      if (!result) {
+        throw new ApolloError('Assessment not found.', 'NOT_FOUND');
+      }
+
+      var softSkillsRates = [];
+
+      await Promise.all(result.axes.map(async (axeArray) => {
+        let axe = await Axe.findById(axeArray.axeId);
+        if (axe.type !== "softSkills") {
+          return false;
+        }
+
+        axeArray.skills.map(skill => {
+          softSkillsRates.push(skill);
+        });
+      }));
+
+      return softSkillsRates;
     }
   },
   Mutation: {

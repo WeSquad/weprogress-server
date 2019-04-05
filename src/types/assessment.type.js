@@ -38,6 +38,7 @@ export default gql`
       skillsTotal: Float
       skillsCount: Float
       axePourcent: Float
+      type: String
     }
 
     input CreateAssessmentInput {
@@ -69,6 +70,7 @@ export default gql`
       assessmentsByUser(userId: ID!, limit: Float): [Assessment]!
       assessment(id: ID!): Assessment
       assessmentRates(id: ID!): [AssessmentRate]
+      assessmentSoftSkillsRates(id: ID!): [AssessmentSkill]
     }
 
     extend type Mutation {
